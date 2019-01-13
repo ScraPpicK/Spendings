@@ -7,12 +7,10 @@
 //
 
 import UIKit
+import CoreData
 
-struct SpendingData {
-    let placeName: String
-    let amount: String
-    let purpose: SpendingPurpose
-    let editable: Bool
+protocol SpendingTableViewCellDelegate: class {
+    func spendingTableViewCellUpdatedValue(_ oldValue: SpendingData, _ newValue: SpendingData)
 }
 
 class SpendingTableViewCell: UITableViewCell, Reusable {
@@ -25,7 +23,6 @@ class SpendingTableViewCell: UITableViewCell, Reusable {
             setTextFieldsEditable(editable)
         }
     }
-    
     private var spendingData: SpendingData? {
         didSet {
             placeTextField.text = spendingData?.placeName
@@ -35,6 +32,9 @@ class SpendingTableViewCell: UITableViewCell, Reusable {
         }
     }
     
+    // MARK: Public Properties
+    weak var delegate: SpendingTableViewCellDelegate?
+    
     // MARK: Public Methods
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -43,21 +43,8 @@ class SpendingTableViewCell: UITableViewCell, Reusable {
         amountTextField.delegate = self
     }
     
-    override func didMoveToSuperview() {
-        super.didMoveToSuperview()
-        if editable == true {
-            placeTextField.becomeFirstResponder()
-        }
-    }
-    
     func configure(_ data: SpendingData) {
         spendingData = data
-    }
-    
-    func setFirstResponder() {
-        if editable == true {
-            placeTextField.becomeFirstResponder()
-        }
     }
     
     // MARK: Private Methods
@@ -68,6 +55,13 @@ class SpendingTableViewCell: UITableViewCell, Reusable {
         [placeTextField, purposeTextField, amountTextField].forEach { textField in
             textField.isUserInteractionEnabled = editable
         }
+        setFirstResponderIfNeeded()
+    }
+    
+    private func setFirstResponderIfNeeded() {
+        if editable == true {
+            placeTextField.becomeFirstResponder()
+        }
     }
 }
 
@@ -75,11 +69,25 @@ extension SpendingTableViewCell: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
         case placeTextField:
+            self.spendingData?.placeName = textField.text ?? ""
             purposeTextField.becomeFirstResponder()
         case purposeTextField:
+            self.spendingData?.purpose = .other
             amountTextField.becomeFirstResponder()
-        default:
+        case amountTextField:
+            let newAmount = textField.text ?? "0"
+            guard let oldValue = spendingData else {
+                textField.resignFirstResponder()
+                return true
+            }
+            var newValue = oldValue
+            newValue.amount = newAmount
+            
+            delegate?.spendingTableViewCellUpdatedValue(oldValue, newValue)
             textField.resignFirstResponder()
+            editable = false
+        default:
+            break
         }
         return true
     }

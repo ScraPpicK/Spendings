@@ -49,19 +49,19 @@
                                                     <rect key="frame" x="301" y="19" width="58" height="17"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textField>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Amount" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dr9-ge-kEs">
                                                     <rect key="frame" x="16" y="54.5" width="351" height="17"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                                 </textField>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Place" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="Gqd-7a-DO5">
                                                     <rect key="frame" x="16" y="19" width="40" height="17"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -83,16 +83,19 @@
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="kLv-uo-ODa"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="RvF-An-kUM"/>
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bql-w7-5Qe">
-                                <rect key="frame" x="313" y="611" width="46" height="40"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <rect key="frame" x="264" y="611" width="95" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="bhS-06-6TP"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="l5I-QI-FBg"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Add spending">
+                                    <color key="titleColor" red="1" green="0.034920876077064067" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="addButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4lN-th-47k"/>
                                 </connections>

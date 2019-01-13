@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		473C71F121E9DE3F00E2FBBF /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473C71F021E9DE3F00E2FBBF /* AppConstants.swift */; };
 		476BCC8521E1FEEF00BF9329 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476BCC8421E1FEEF00BF9329 /* AppDelegate.swift */; };
 		476BCC8721E1FEEF00BF9329 /* SpendingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476BCC8621E1FEEF00BF9329 /* SpendingsViewController.swift */; };
 		476BCC8A21E1FEEF00BF9329 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 476BCC8821E1FEEF00BF9329 /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		473C71F021E9DE3F00E2FBBF /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		476BCC8121E1FEEF00BF9329 /* Finances.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Finances.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		476BCC8421E1FEEF00BF9329 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		476BCC8621E1FEEF00BF9329 /* SpendingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingsViewController.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				476BCC9D21E200CF00BF9329 /* Reusable.swift */,
+				473C71F021E9DE3F00E2FBBF /* AppConstants.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -256,6 +259,7 @@
 				476BCC8721E1FEEF00BF9329 /* SpendingsViewController.swift in Sources */,
 				476BCC8521E1FEEF00BF9329 /* AppDelegate.swift in Sources */,
 				476BCCA221E20D5600BF9329 /* SpendingsViewCoordinator.swift in Sources */,
+				473C71F121E9DE3F00E2FBBF /* AppConstants.swift in Sources */,
 				476BCC8D21E1FEEF00BF9329 /* Finances.xcdatamodeld in Sources */,
 				476BCCA021E2019B00BF9329 /* SpendingTableViewCell.swift in Sources */,
 			);
