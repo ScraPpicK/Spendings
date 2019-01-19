@@ -17,6 +17,8 @@
 		476BCC9E21E200CF00BF9329 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476BCC9D21E200CF00BF9329 /* Reusable.swift */; };
 		476BCCA021E2019B00BF9329 /* SpendingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476BCC9F21E2019B00BF9329 /* SpendingTableViewCell.swift */; };
 		476BCCA221E20D5600BF9329 /* SpendingsViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476BCCA121E20D5600BF9329 /* SpendingsViewCoordinator.swift */; };
+		47EF839A21F2ED9A00FA3214 /* RunOnMainAvoidDeadlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EF839921F2ED9A00FA3214 /* RunOnMainAvoidDeadlock.swift */; };
+		47EF839C21F2EF0500FA3214 /* CustomTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EF839B21F2EF0500FA3214 /* CustomTypes.swift */; };
 		8A9AC4977845F41E36822750 /* Pods_Finances.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1DFAAFFA041F88300D7AAF9 /* Pods_Finances.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +35,8 @@
 		476BCC9D21E200CF00BF9329 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		476BCC9F21E2019B00BF9329 /* SpendingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingTableViewCell.swift; sourceTree = "<group>"; };
 		476BCCA121E20D5600BF9329 /* SpendingsViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingsViewCoordinator.swift; sourceTree = "<group>"; };
+		47EF839921F2ED9A00FA3214 /* RunOnMainAvoidDeadlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunOnMainAvoidDeadlock.swift; sourceTree = "<group>"; };
+		47EF839B21F2EF0500FA3214 /* CustomTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTypes.swift; sourceTree = "<group>"; };
 		F1DFAAFFA041F88300D7AAF9 /* Pods_Finances.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Finances.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F84C3E29F5B63D8E7147DC25 /* Pods-Finances.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Finances.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Finances/Pods-Finances.debug.xcconfig"; sourceTree = "<group>"; };
 		FA41735F2506203D14D5209C /* Pods-Finances.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Finances.release.xcconfig"; path = "Pods/Target Support Files/Pods-Finances/Pods-Finances.release.xcconfig"; sourceTree = "<group>"; };
@@ -114,6 +118,8 @@
 			children = (
 				476BCC9D21E200CF00BF9329 /* Reusable.swift */,
 				473C71F021E9DE3F00E2FBBF /* AppConstants.swift */,
+				47EF839921F2ED9A00FA3214 /* RunOnMainAvoidDeadlock.swift */,
+				47EF839B21F2EF0500FA3214 /* CustomTypes.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -255,6 +261,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47EF839C21F2EF0500FA3214 /* CustomTypes.swift in Sources */,
+				47EF839A21F2ED9A00FA3214 /* RunOnMainAvoidDeadlock.swift in Sources */,
 				476BCC9E21E200CF00BF9329 /* Reusable.swift in Sources */,
 				476BCC8721E1FEEF00BF9329 /* SpendingsViewController.swift in Sources */,
 				476BCC8521E1FEEF00BF9329 /* AppDelegate.swift in Sources */,
@@ -417,7 +425,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = vadym.patalakh.Finances;
+				PRODUCT_BUNDLE_IDENTIFIER = vadym.patalakh.finances;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
@@ -439,7 +447,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = vadym.patalakh.Finances;
+				PRODUCT_BUNDLE_IDENTIFIER = vadym.patalakh.finances;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;

@@ -74,6 +74,16 @@ class SpendingsViewCoordinator {
         updateAndSaveSpending(spending, withData: spendingData)
     }
     
+    func deleteSpending(_ spendingData: SpendingData, completion: @escaping SuccessCompletion) {
+        guard let spending = Spending.mr_findFirst(byAttribute: "id", withValue: spendingData.id) else { return }
+        let deletingSuccess = spending.mr_deleteEntity(in: localContext)
+        var savingSuccess = false
+        localContext.mr_saveToPersistentStore { (success, error) in
+            savingSuccess = success
+            completion(deletingSuccess && savingSuccess)
+        }
+    }
+    
     // MARK: Private Methods
     private func getSpendings() -> [SpendingData] {
         guard let spendings = Spending.mr_findAll() as? [Spending] else { return [SpendingData]() }
@@ -111,8 +121,7 @@ class SpendingsViewCoordinator {
 }
 
 extension SpendingsViewCoordinator: SpendingTableViewCellDelegate {
-    func spendingTableViewCellUpdatedValue(_ oldValue: SpendingData, _ newValue: SpendingData) {
-        guard let spending = Spending.mr_findFirst(byAttribute: "id", withValue: oldValue.id) else { return }
-        updateAndSaveSpending(spending, withData: newValue)
+    func spendingTableViewCellUpdatedValue(_ newValue: SpendingData) {
+        updateOrAddSpendingIfNeeded(newValue)
     }
 }

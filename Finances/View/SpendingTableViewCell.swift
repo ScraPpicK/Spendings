@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 protocol SpendingTableViewCellDelegate: class {
-    func spendingTableViewCellUpdatedValue(_ oldValue: SpendingData, _ newValue: SpendingData)
+    func spendingTableViewCellUpdatedValue(_ newValue: SpendingData)
 }
 
 class SpendingTableViewCell: UITableViewCell, Reusable {
@@ -18,6 +18,7 @@ class SpendingTableViewCell: UITableViewCell, Reusable {
     @IBOutlet private weak var placeTextField: UITextField!
     @IBOutlet private weak var purposeTextField: UITextField!
     @IBOutlet private weak var amountTextField: UITextField!
+    private var textfields: [UITextField]?
     private var editable = false {
         didSet {
             setTextFieldsEditable(editable)
@@ -41,6 +42,7 @@ class SpendingTableViewCell: UITableViewCell, Reusable {
         placeTextField.delegate = self
         purposeTextField.delegate = self
         amountTextField.delegate = self
+        setupTextFields()
     }
     
     func configure(_ data: SpendingData) {
@@ -48,12 +50,16 @@ class SpendingTableViewCell: UITableViewCell, Reusable {
     }
     
     // MARK: Private Methods
+    private func setupTextFields() {
+        textfields = [placeTextField, purposeTextField, amountTextField]
+    }
+
     func setTextFieldsEditable(_ editable: Bool) {
-        guard let placeTextField = placeTextField,
-            let purposeTextField = purposeTextField,
-            let amountTextField = amountTextField else { return }
-        [placeTextField, purposeTextField, amountTextField].forEach { textField in
-            textField.isUserInteractionEnabled = editable
+        guard let textFields = self.textfields else { return }
+        textFields.forEach { textField in
+            runOnMainAvoidDeadlock {
+                textField.isUserInteractionEnabled = editable
+            }
         }
         setFirstResponderIfNeeded()
     }
@@ -61,6 +67,11 @@ class SpendingTableViewCell: UITableViewCell, Reusable {
     private func setFirstResponderIfNeeded() {
         if editable == true {
             placeTextField.becomeFirstResponder()
+        } else {
+            guard let textFields = self.textfields else { return }
+            textFields.forEach { textField in
+                textField.resignFirstResponder()
+            }
         }
     }
 }
@@ -76,15 +87,13 @@ extension SpendingTableViewCell: UITextFieldDelegate {
             amountTextField.becomeFirstResponder()
         case amountTextField:
             let newAmount = textField.text ?? "0"
-            guard let oldValue = spendingData else {
+            guard var spending = spendingData else {
                 textField.resignFirstResponder()
                 return true
             }
-            var newValue = oldValue
-            newValue.amount = newAmount
+            spending.amount = newAmount
             
-            delegate?.spendingTableViewCellUpdatedValue(oldValue, newValue)
-            textField.resignFirstResponder()
+            delegate?.spendingTableViewCellUpdatedValue(spending)
             editable = false
         default:
             break

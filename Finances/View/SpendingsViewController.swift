@@ -39,7 +39,6 @@ class SpendingsViewController: UIViewController {
         tableViewData.insert(newSpendingData, at: 0)
         let indexPath = IndexPath(item: 0, section: 0)
         tableView.insertRows(at: [indexPath], with: .top)
-        coordinator.updateOrAddSpendingIfNeeded(newSpendingData)
     }
 }
 
@@ -54,6 +53,7 @@ extension SpendingsViewController: UITableViewDataSource {
             return SpendingTableViewCell()
         }
         
+        cell.configure(tableViewData[indexPath.row])
         cell.delegate = coordinator
         return cell
     }
@@ -64,8 +64,22 @@ extension SpendingsViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let cell = cell as? SpendingTableViewCell else { return }
-        cell.configure(tableViewData[indexPath.row])
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let editAction = UITableViewRowAction(style: .default, title: "Edit") { (_, indexPath) in
+            self.tableViewData[indexPath.row].editable = true
+            self.tableView.reloadRows(at: [indexPath], with: .none)
+        }
+        editAction.backgroundColor = .orange
+        
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (_, indexPath) in
+            let spending = self.tableViewData[indexPath.row]
+            self.coordinator.deleteSpending(spending, completion: { success in
+                if success {
+                    self.tableViewData.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .automatic)
+                }
+            })
+        }
+        return [deleteAction, editAction]
     }
 }
